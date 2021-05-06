@@ -2,6 +2,8 @@
 
 # This inherits from SecuredController, so all requests must include an access token
 class ChirpsController < SecuredController
+  skip_before_action :authorize_request, only: %i[index show]
+
   def index
     chirps = Chirp.all
     render json: chirps
